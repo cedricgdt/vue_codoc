@@ -1,7 +1,13 @@
 <script setup>
-import NavBar from './components/NavBar.vue'
-import DocumentList from './components/DocumentList.vue'
-import Header from './components/Header.vue'
+import NavBar from './components/NavBar/NavBar.vue'
+import DocumentList from './components/DocumentList/DocumentList.vue'
+import Header from './components/Header/Header.vue'
+
+import { usePatientStore } from './stores/patient'
+
+const patient = usePatientStore()
+patient.sortDocuments('document_date')
+
 </script>
 
 <template>
@@ -22,12 +28,6 @@ import Header from './components/Header.vue'
 
   font-weight: normal;
   display: flex;
-  flex-direction: column;
-  
+  flex-direction: column; 
 }
-
-header {
-
-}
-
 </style>

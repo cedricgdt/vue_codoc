@@ -1,10 +1,12 @@
 <script setup>
 import { ref } from 'vue'
-import { usePatientStore } from '../stores/patient'
+import { usePatientStore } from '../../stores/patient'
+import NewspaperIcon from '../icons/NewspaperIcon.vue'
+import ArrowRightIcon from '../icons/ArrowRightIcon.vue'
 
 const patient = usePatientStore()
 
-const props = defineProps({
+defineProps({
   doc: {
     type: Object,
     required: true,
@@ -13,7 +15,7 @@ const props = defineProps({
 
 const opened = ref(false)
 
-function triggerDoc() {
+const triggerDoc = () => {
   opened.value = !opened.value
 }
 
@@ -32,7 +34,7 @@ function getMonth(nb) {
       return "Avr"
       break;
     case "05":
-      return "Mais"
+      return "Mai"
       break;
     case "06":
       return "Juin"
@@ -89,7 +91,7 @@ function addHighLight(text) {
   <tr v-bind:class="{ active: opened}" class="pointer" v-on:click="triggerDoc">
     <td class="column-tab">{{ doc.document_date.slice(0, 4) }}</td>
     <td class="column-tab">{{ dateFormate(doc.document_date) }}</td>
-    <td class="column-tab"><img src="../assets/Newspaper.svg" alt="news"> {{ doc.document_type }}</td>
+    <td class="column-tab"><NewspaperIcon /> {{ doc.document_type }}</td>
     <td class="column-tab">{{ doc.document_origin_code }}</td>
     <td class="column-tab">
       <div v-bind:class="{ active: opened}">
@@ -97,7 +99,7 @@ function addHighLight(text) {
         <div class="doc-content" v-html="textFormat(doc.displayed_text)"></div>
       </div>
     </td>
-    <td class="column-tab"><img v-bind:class="{ active: opened}" class="arrow-right" src="../assets/CaretRight.svg" alt="arrow at right"></td>
+    <td class="column-tab"><ArrowRightIcon v-bind:class="{ active: opened}" class="arrow-right" /></td>
   </tr>
 
   <tr v-if="opened">
